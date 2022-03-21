@@ -13,17 +13,3 @@ helm repo update
 
 helm install crossplane --namespace crossplane-system crossplane-stable/crossplane
 ```
-
-
-## Configure Providers
-Create secret
-```sh
-kubectl create secret generic aws-creds -n crossplane-system --from-file=creds=./config/crossplane/provider/creds.conf
-```
-
-
-```sh
-k apply -f config/crossplane/provider/provider-aws.yaml
-k apply -f config/crossplane/provider/provider-jet-aws.yaml
-# Config is going to fail until the provider have not configure the kind
-```
