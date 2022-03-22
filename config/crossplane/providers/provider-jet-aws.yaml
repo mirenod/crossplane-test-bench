@@ -1,18 +1,6 @@
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-aws
+  name: provider-jet-aws
 spec:
   package: "crossplane/provider-jet-aws:v0.4.1"
----
-apiVersion: aws.jet.crossplane.io/v1alpha1
-kind: ProviderConfig
-metadata:
-  name: aws-jet-provider
-spec:
-  credentials:
-    source: Secret
-    secretRef:
-      namespace: crossplane-system
-      name: aws-creds
-      key: creds

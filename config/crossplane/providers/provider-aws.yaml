@@ -4,3 +4,4 @@ metadata:
   name: provider-aws
 spec:
   package: "crossplane/provider-aws:v0.25.0"
+
