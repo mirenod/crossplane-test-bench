@@ -1,0 +1,36 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xvpcs.network.mdg.org
+spec:
+  group: network.mdg.org
+  names:
+    kind: XVpc
+    plural: xvpcs
+  claimNames:
+    kind: Vpc
+    plural: vpcs
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: VPC name.
+                  vpcCidrBlock: # Todo we need to discuss about naming convention  No SomethingDNSRecord, Yes SomethingDnsRecord
+                    type: string
+                    default: 172.16.0.0/16
+                required:
+                  - name
+            required:
+              - parameters

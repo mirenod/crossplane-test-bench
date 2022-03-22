@@ -1,0 +1,12 @@
+apiVersion: network.mdg.org/v1alpha1
+kind: Vpc
+metadata:
+  name: my-vpc
+  namespace: default
+spec:
+  parameters:
+    name: testVPC
+  compositionSelector:
+    matchLabels:
+      provider: jet-aws
+      vpc: new

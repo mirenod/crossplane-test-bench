@@ -1,0 +1,28 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xvpcs.network.mdg.org
+  labels:
+    provider: jet-aws
+    vpc: new
+spec:
+  compositeTypeRef:
+    apiVersion: network.mdg.org/v1alpha1
+    kind: XVpc
+  resources:
+    - name: vpc
+      base:
+        apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+        kind: VPC
+        metadata:
+          name: sample-vpc
+        spec:
+          forProvider:
+            region: eu-west-1
+          providerConfigRef:
+            name: jet-aws-provider
+      patches:
+        - fromFieldPath: "spec.parameters.name"
+          toFieldPath: "spec.forProvider.tags.Name"
+        - fromFieldPath: "spec.parameters.vpcCidrBlock"
+          toFieldPath: "spec.forProvider.cidrBlock"
