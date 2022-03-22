@@ -1,0 +1,28 @@
+apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+kind: VPC
+metadata:
+  name: sample-vpc
+spec:
+  forProvider:
+    region: eu-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+  providerConfigRef: # Select a different account using ProviderConfig
+    name: jet-aws-provider
+---
+apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+kind: Subnet
+metadata:
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: eu-west-1
+    availabilityZone: eu-west-1a
+    vpcIdRef:
+      name: sample-vpc ## The name of the K8s resource
+    cidrBlock: 172.16.10.0/24
+    tags:
+      Name: DemoSubnet
+  providerConfigRef: # Select a different account using ProviderConfig
+    name: jet-aws-provider
